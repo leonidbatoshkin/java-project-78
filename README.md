@@ -3,7 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/478b2bbb7180ff7aff6b/maintainability)](https://codeclimate.com/github/leonidbatoshkin/java-project-78/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/478b2bbb7180ff7aff6b/test_coverage)](https://codeclimate.com/github/leonidbatoshkin/java-project-78/test_coverage)
 
-**Data validator** is a library that can be used to check the correctness of any data. There are many such libraries in every language, since almost all programs work with external data that needs to be checked for correctness. First of all, we are talking about the data of forms filled out by users. The [yup](https://github.com/jquense/yup)library is taken as the basis for the project.
+**Data validator** is a library that can be used to check the correctness of any data. There are many such libraries in every language, since almost all programs work with external data that needs to be checked for correctness. First of all, we are talking about the data of forms filled out by users. The [yup](https://github.com/jquense/yup) library is taken as the basis for the project.
 
 Usage example:
 
