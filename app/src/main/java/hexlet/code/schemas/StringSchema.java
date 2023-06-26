@@ -5,10 +5,10 @@ public class StringSchema {
     private int minLength;
     private String substring;
 
-    public StringSchema(boolean required, int minLength, String substring) {
+    public StringSchema(boolean required, int minLength, String piece) {
         this.required = required;
         this.minLength = minLength;
-        this.substring = substring;
+        this.substring = piece;
     }
 
     public StringSchema() {
@@ -27,8 +27,8 @@ public class StringSchema {
         return this;
     }
 
-    public StringSchema contains(String substring) {
-        this.substring = substring;
+    public StringSchema contains(String piece) {
+        this.substring = piece;
         return this;
     }
 
@@ -39,6 +39,6 @@ public class StringSchema {
         if (!substring.equals("") && !obj.toString().contains(substring)) {
             return false;
         }
-        return minLength == 0 || obj.toString().length() <= minLength;
+        return minLength == 0 || obj.toString().length() >= minLength;
     }
 }

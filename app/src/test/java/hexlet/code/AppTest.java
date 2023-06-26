@@ -26,10 +26,10 @@ public class AppTest {
         assertFalse(schema.isValid(""));
         assertFalse(schema.isValid(null));
         assertFalse(schema.isValid(5));
-
         assertTrue(schema.isValid("what does the fox say"));
         assertTrue(schema.isValid("hexlet"));
-
+        assertTrue(schema.minLength(4).isValid("hexlet"));
+        assertFalse(schema.minLength(4).isValid("hex"));
         assertTrue(schema.contains("what").isValid("what does the fox say"));
         assertFalse(schema.contains("whatthe").isValid("what does the fox say"));
         assertFalse(schema.isValid("what does the fox say"));
