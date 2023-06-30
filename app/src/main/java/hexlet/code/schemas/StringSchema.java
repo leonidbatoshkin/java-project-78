@@ -26,7 +26,7 @@ public class StringSchema extends BaseSchema {
 
     @Override
     public <T> boolean isValid(T obj) {
-        if (super.isRequired() && (!(obj instanceof String) || obj.toString().equals(""))) {
+        if (isRequired() && (!(obj instanceof String) || obj.toString().equals(""))) {
             return false;
         }
         if (!substring.equals("") && !obj.toString().contains(substring)) {

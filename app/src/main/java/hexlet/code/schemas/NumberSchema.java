@@ -29,7 +29,7 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public <T> boolean isValid(T obj) {
-        var required = super.isRequired();
+        var required = isRequired();
         if ((obj == null) && required) {
             return false;
         }
