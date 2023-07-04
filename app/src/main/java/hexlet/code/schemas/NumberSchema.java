@@ -1,6 +1,7 @@
 package hexlet.code.schemas;
 
 public class NumberSchema extends BaseSchema {
+    private boolean required;
     private boolean positive;
     private int[] range;
 
@@ -10,11 +11,13 @@ public class NumberSchema extends BaseSchema {
     public NumberSchema(boolean positive, int[] range) {
         this.positive = positive;
         this.range = range;
+        this.required = false;
     }
 
     public NumberSchema() {
         this.positive = false;
         this.range = null;
+        this.required = false;
     }
 
     public NumberSchema positive() {
@@ -28,8 +31,13 @@ public class NumberSchema extends BaseSchema {
     }
 
     @Override
+    public NumberSchema required() {
+        this.required = true;
+        return this;
+    }
+
+    @Override
     public <T> boolean isValid(T obj) {
-        var required = isRequired();
         if ((obj == null) && required) {
             return false;
         }

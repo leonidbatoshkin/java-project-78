@@ -5,6 +5,7 @@ import java.util.Map;
 public class MapSchema extends BaseSchema {
     private int size;
     private boolean nested;
+    private boolean required;
     private Map<String, BaseSchema> schemas;
 
     public MapSchema sizeof(int mapSize) {
@@ -29,8 +30,14 @@ public class MapSchema extends BaseSchema {
     }
 
     @Override
+    public MapSchema required() {
+        this.required = true;
+        return this;
+    }
+
+    @Override
     public <T> boolean isValid(T obj) {
-        if (isRequired() && !(obj instanceof Map)) {
+        if (required && !(obj instanceof Map)) {
             return false;
         }
         if (size != 0 && obj instanceof Map && ((Map<?, ?>) obj).size() != size) {
