@@ -37,10 +37,9 @@ public class MapSchema extends BaseSchema {
             return false;
         }
         if (nested) {
-            var res =  schemas.entrySet().stream()
+            return schemas.entrySet().stream()
                     .map(schema -> schema.getValue().isValid(((Map<?, ?>) obj).get(schema.getKey())))
                     .allMatch(schema -> schema.equals(true));
-            return res;
         }
         return true;
     }

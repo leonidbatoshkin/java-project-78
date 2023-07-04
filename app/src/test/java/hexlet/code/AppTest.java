@@ -86,9 +86,8 @@ public class AppTest {
 
         /*Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);
-        var res1 = mapSchema.isValid(human1);
-        assertTrue(res1);
+        human1.put("age", 100);;
+        assertTrue(mapSchema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
