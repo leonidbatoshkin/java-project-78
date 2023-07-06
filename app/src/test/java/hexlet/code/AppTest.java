@@ -4,6 +4,7 @@ import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.StringSchema;
 import hexlet.code.schemas.NumberSchema;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,14 @@ public class AppTest {
         schemas = new HashMap<>();
     }
 
+    @AfterAll
+    static void destroy() {
+        v = null;
+        stringSchema = null;
+        numberSchema = null;
+        mapSchema = null;
+    }
+
     @Test
     void testStringSchema() {
         assertTrue(stringSchema.isValid(""));
@@ -52,6 +61,7 @@ public class AppTest {
     void testNumberSchema() {
         assertTrue(numberSchema.isValid(null));
         assertTrue(numberSchema.positive().isValid(null));
+        assertFalse(numberSchema.positive().isValid(-5));
         numberSchema.required();
         assertFalse(numberSchema.isValid(null));
         assertFalse(numberSchema.isValid("5"));
@@ -86,7 +96,7 @@ public class AppTest {
 
         /*Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);;
+        human1.put("age", 100);
         assertTrue(mapSchema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();

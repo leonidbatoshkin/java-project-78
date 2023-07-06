@@ -44,6 +44,9 @@ public class NumberSchema extends BaseSchema {
         if (positive && required && Integer.parseInt(obj.toString()) < 1) {
             return false;
         }
+        if (positive && obj instanceof Integer && Integer.parseInt(obj.toString()) < 1) {
+            return false;
+        }
         if (range != null && obj instanceof Integer
                 && ((Integer) obj < range[START_POSITION] || (Integer) obj > range[LAST_POSITION])) {
             return false;
