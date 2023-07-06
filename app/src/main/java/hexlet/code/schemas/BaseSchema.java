@@ -1,17 +1,13 @@
 package hexlet.code.schemas;
 
 public class BaseSchema {
-    private boolean required;
-
-    public BaseSchema() {
-        this.required = false;
-    }
-
-    public BaseSchema required() {
-        this.required = true;
-        return this;
-    }
-
+    /**
+     * method to override.
+     *
+     * @param <T> the type of the input object
+     * @param obj the object to validate
+     * @return the result of the schema's validation
+     */
     public <T> boolean isValid(T obj) {
         return true;
     }

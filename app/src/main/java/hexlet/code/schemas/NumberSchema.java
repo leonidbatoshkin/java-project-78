@@ -1,18 +1,12 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema {
     private boolean required;
     private boolean positive;
     private int[] range;
 
     private static final int START_POSITION = 0;
     private static final int LAST_POSITION = 1;
-
-    public NumberSchema(boolean positive, int[] range) {
-        this.positive = positive;
-        this.range = range;
-        this.required = false;
-    }
 
     public NumberSchema() {
         this.positive = false;
@@ -30,7 +24,6 @@ public class NumberSchema extends BaseSchema {
         return this;
     }
 
-    @Override
     public NumberSchema required() {
         this.required = true;
         return this;
@@ -41,10 +34,7 @@ public class NumberSchema extends BaseSchema {
         if ((obj == null) && required) {
             return false;
         }
-        if (positive && required && Integer.parseInt(obj.toString()) < 1) {
-            return false;
-        }
-        if (positive && obj instanceof Integer && Integer.parseInt(obj.toString()) < 1) {
+        if (positive && (required || obj instanceof Integer) && Integer.parseInt(obj.toString()) < 1) {
             return false;
         }
         if (range != null && obj instanceof Integer
