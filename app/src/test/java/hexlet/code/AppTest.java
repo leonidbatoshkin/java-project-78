@@ -4,8 +4,8 @@ import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.StringSchema;
 import hexlet.code.schemas.NumberSchema;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -23,8 +23,8 @@ public class AppTest {
     private static Map<String, BaseSchema> schemas;
     private static Validator v;
 
-    @BeforeAll
-    static void init() {
+    @BeforeEach
+    void init() {
         v = new Validator();
         stringSchema = v.string();
         numberSchema = v.number();
@@ -32,8 +32,8 @@ public class AppTest {
         schemas = new HashMap<>();
     }
 
-    @AfterAll
-    static void destroy() {
+    @AfterEach
+    void destroy() {
         v = null;
         stringSchema = null;
         numberSchema = null;
@@ -94,7 +94,7 @@ public class AppTest {
         schemas.put("age", v.number().positive());
         mapSchema.shape(schemas);
 
-        /*Map<String, Object> human1 = new HashMap<>();
+        Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);
         assertTrue(mapSchema.isValid(human1));
@@ -102,7 +102,7 @@ public class AppTest {
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
-        assertTrue(mapSchema.isValid(human2));*/
+        assertTrue(mapSchema.isValid(human2));
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
