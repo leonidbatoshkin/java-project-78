@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class AppTest {
+public final class AppTest {
 
     private static StringSchema stringSchema;
     private static NumberSchema numberSchema;
