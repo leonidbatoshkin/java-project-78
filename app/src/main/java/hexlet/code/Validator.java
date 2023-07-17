@@ -1,30 +1,20 @@
 package hexlet.code;
 
 import hexlet.code.schemas.MapSchema;
-import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
+import hexlet.code.schemas.NumberSchema;
 
 public final class Validator {
 
-    private final NumberSchema numSchema;
-    private final StringSchema stringSchema;
-    private final MapSchema mapSchema;
-
-    public Validator() {
-        stringSchema = new StringSchema();
-        numSchema = new NumberSchema();
-        mapSchema = new MapSchema();
-    }
-
     public StringSchema string() {
-        return stringSchema;
+        return new StringSchema();
     }
 
     public NumberSchema number() {
-        return numSchema;
+        return new NumberSchema();
     }
 
     public MapSchema map() {
-        return mapSchema;
+        return new MapSchema();
     }
 }

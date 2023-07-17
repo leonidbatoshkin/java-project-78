@@ -1,43 +1,31 @@
 package hexlet.code.schemas;
 
-public final class StringSchema extends BaseSchema {
-    private int minLength;
-    private String substring;
-    private boolean required;
+import java.util.function.Predicate;
 
-    public StringSchema() {
-        this.minLength = 0;
-        this.substring = "";
-        this.required = false;
+public final class StringSchema extends BaseSchema<String> {
+    private int length;
+    private String substring;
+
+    Predicate<String> checkLength = str -> str.length() > length;
+    Predicate<String> checkRequired = str -> !str.isEmpty();
+    Predicate<String> checkContains = str -> str.contains(substring);
+
+    @Override
+    public BaseSchema<String> required() {
+        super.required();
+        setNewValidation(checkRequired);
+        return this;
     }
 
     public StringSchema minLength(int number) {
-        this.minLength = number;
+        length = number;
+        setNewValidation(checkLength);
         return this;
     }
 
-    public StringSchema contains(String piece) {
-        this.substring = piece;
+    public StringSchema contains(String str) {
+        substring = str;
+        setNewValidation(checkContains);
         return this;
-    }
-
-    public StringSchema string() {
-        return this;
-    }
-
-    public StringSchema required() {
-        this.required = true;
-        return this;
-    }
-
-    @Override
-    public <T> boolean isValid(T obj) {
-        if (required && (!(obj instanceof String) || obj.toString().equals(""))) {
-            return false;
-        }
-        if (!substring.equals("") && !obj.toString().contains(substring)) {
-            return false;
-        }
-        return minLength == 0 || obj.toString().length() >= minLength;
     }
 }

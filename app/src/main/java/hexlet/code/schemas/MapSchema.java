@@ -1,47 +1,26 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
-public final class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema<Map> {
     private int size;
-    private boolean nested;
-    private boolean required;
     private Map<String, BaseSchema> schemas;
 
-    public MapSchema sizeof(int mapSize) {
-        this.size = mapSize;
-        return this;
-    }
+    Predicate<Map> checkSize = map -> map.size() == size;
+    Predicate<Map> checkNested = map -> schemas.entrySet().stream()
+            .map(schema -> schema.getValue().isValid(map.get(schema.getKey())))
+            .allMatch(schema -> schema.equals(true));
 
-    public MapSchema() {
-        this.size = 0;
-        this.nested = false;
+    public MapSchema sizeof(int mapSize) {
+        size = mapSize;
+        setNewValidation(checkSize);
+        return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> maps) {
-        this.nested = true;
         this.schemas = maps;
+        setNewValidation(checkNested);
         return this;
-    }
-
-    public MapSchema required() {
-        this.required = true;
-        return this;
-    }
-
-    @Override
-    public <T> boolean isValid(T obj) {
-        if (required && !(obj instanceof Map)) {
-            return false;
-        }
-        if (size != 0 && obj instanceof Map && ((Map<?, ?>) obj).size() != size) {
-            return false;
-        }
-        if (nested) {
-            return schemas.entrySet().stream()
-                    .map(schema -> schema.getValue().isValid(((Map<?, ?>) obj).get(schema.getKey())))
-                    .allMatch(schema -> schema.equals(true));
-        }
-        return true;
     }
 }
