@@ -11,7 +11,7 @@ public final class StringSchema extends BaseSchema {
     Predicate<Object> checkContains = str -> str instanceof String && str.toString().contains(substring);
 
     @Override
-    public BaseSchema required() {
+    public StringSchema required() {
         super.required();
         setNewValidation(checkRequired);
         return this;
