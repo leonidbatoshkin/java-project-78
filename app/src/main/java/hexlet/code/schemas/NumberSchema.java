@@ -7,8 +7,8 @@ public final class NumberSchema extends BaseSchema {
     private static final int START_POSITION = 0;
     private static final int LAST_POSITION = 1;
 
-    Predicate<Object> checkPositive = num -> num instanceof Integer && (int) num > 0;
-    Predicate<Object> checkRange = num -> num instanceof Integer
+    private final Predicate<Object> checkPositive = num -> num instanceof Integer && (int) num > 0;
+    private final Predicate<Object> checkRange = num -> num instanceof Integer
             && (int) num >= range[START_POSITION] && (int) num <= range[LAST_POSITION];
 
     public NumberSchema positive() {

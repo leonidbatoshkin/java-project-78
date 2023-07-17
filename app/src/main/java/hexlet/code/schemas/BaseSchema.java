@@ -7,20 +7,25 @@ import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    List<Predicate<Object>> validations = new ArrayList<>();
+    private final List<Predicate<Object>> validations = new ArrayList<>();
 
-    Predicate<Object> checkRequired = Objects::nonNull;
+    private final Predicate<Object> checkRequired = Objects::nonNull;
 
     public final void setNewValidation(Predicate<Object> validation) {
         validations.add(validation);
     }
 
+    /**
+     * method to override.
+     *
+     * @return the current object
+     */
     public BaseSchema required() {
         setNewValidation(checkRequired);
         return this;
     }
 
-    public boolean isValid(Object obj) {
+    public final boolean isValid(Object obj) {
         if (!(validations.contains(checkRequired)) && obj == null) {
             return true;
         } else if (validations.contains(checkRequired) && obj == null) {
