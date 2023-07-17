@@ -2,16 +2,16 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public final class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema {
     private int length;
     private String substring;
 
-    Predicate<String> checkLength = str -> str.length() > length;
-    Predicate<String> checkRequired = str -> !str.isEmpty();
-    Predicate<String> checkContains = str -> str.contains(substring);
+    Predicate<Object> checkLength = str -> str instanceof String && str.toString().length() > length;
+    Predicate<Object> checkRequired = str -> str instanceof String && !str.toString().isEmpty();
+    Predicate<Object> checkContains = str -> str instanceof String && str.toString().contains(substring);
 
     @Override
-    public BaseSchema<String> required() {
+    public BaseSchema required() {
         super.required();
         setNewValidation(checkRequired);
         return this;
@@ -23,8 +23,8 @@ public final class StringSchema extends BaseSchema<String> {
         return this;
     }
 
-    public StringSchema contains(String str) {
-        substring = str;
+    public StringSchema contains(String string) {
+        substring = string;
         setNewValidation(checkContains);
         return this;
     }

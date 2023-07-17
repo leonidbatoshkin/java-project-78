@@ -50,7 +50,7 @@ public final class AppTest {
         assertFalse(stringSchema.isValid(null));
         assertTrue(stringSchema.isValid("what does the fox say"));
         assertTrue(stringSchema.isValid("hexlet"));
-//        assertFalse(stringSchema.isValid(5));  validation is not required due to automatic type checking
+        assertFalse(stringSchema.isValid(5));
         assertTrue(stringSchema.minLength(4).isValid("hexlet"));
         assertFalse(stringSchema.minLength(4).isValid("hex"));
         assertTrue(stringSchema.contains("what").isValid("what does the fox say"));
@@ -65,7 +65,7 @@ public final class AppTest {
         assertFalse(numberSchema.positive().isValid(-5));
         numberSchema.required();
         assertFalse(numberSchema.isValid(null));
-//        assertFalse(numberSchema.isValid("5"));  validation is not required due to automatic type checking
+        assertFalse(numberSchema.isValid("5"));
         assertTrue(numberSchema.isValid(10));
         assertFalse(numberSchema.isValid(-10));
         assertFalse(numberSchema.isValid(0));

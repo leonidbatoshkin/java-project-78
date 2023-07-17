@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class BaseSchema<T> {
+public class BaseSchema {
 
-    List<Predicate<T>> validations = new ArrayList<>();
+    List<Predicate<Object>> validations = new ArrayList<>();
 
-    Predicate<T> checkRequired = Objects::nonNull;
+    Predicate<Object> checkRequired = Objects::nonNull;
 
-    public final void setNewValidation(Predicate<T> validation) {
+    public final void setNewValidation(Predicate<Object> validation) {
         validations.add(validation);
     }
 
@@ -20,7 +20,7 @@ public class BaseSchema<T> {
         return this;
     }
 
-    public boolean isValid(T obj) {
+    public boolean isValid(Object obj) {
         if (!(validations.contains(checkRequired)) && obj == null) {
             return true;
         } else if (validations.contains(checkRequired) && obj == null) {

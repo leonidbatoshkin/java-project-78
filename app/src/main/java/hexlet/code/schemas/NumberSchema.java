@@ -2,14 +2,14 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public final class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema {
     private int[] range;
-
     private static final int START_POSITION = 0;
     private static final int LAST_POSITION = 1;
 
-    Predicate<Integer> checkPositive = num -> num > 0;
-    Predicate<Integer> checkRange = num -> num >= range[START_POSITION] && num <= range[LAST_POSITION];
+    Predicate<Object> checkPositive = num -> num instanceof Integer && (int) num > 0;
+    Predicate<Object> checkRange = num -> num instanceof Integer
+            && (int) num >= range[START_POSITION] && (int) num <= range[LAST_POSITION];
 
     public NumberSchema positive() {
         setNewValidation(checkPositive);
