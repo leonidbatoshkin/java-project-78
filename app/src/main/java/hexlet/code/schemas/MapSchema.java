@@ -7,8 +7,8 @@ public final class MapSchema extends BaseSchema {
     private int size;
     private Map<String, BaseSchema> schemas;
 
-    Predicate<Object> checkSize = map -> map instanceof Map && ((Map<?, ?>) map).size() == size;
-    Predicate<Object> checkNested = map -> map instanceof Map && schemas.entrySet().stream()
+    private final Predicate<Object> checkSize = map -> map instanceof Map && ((Map<?, ?>) map).size() == size;
+    private final Predicate<Object> checkNested = map -> map instanceof Map && schemas.entrySet().stream()
             .map(schema -> schema.getValue().isValid(((Map<?, ?>) map).get(schema.getKey())))
             .allMatch(schema -> schema.equals(true));
 
