@@ -26,10 +26,8 @@ public class BaseSchema {
     }
 
     public final boolean isValid(Object obj) {
-        if (!(validations.contains(checkRequired)) && obj == null) {
+        if (obj == null && !validations.contains(checkRequired)) {
             return true;
-        } else if (validations.contains(checkRequired) && obj == null) {
-            return false;
         } else {
             return validations.stream()
                     .allMatch(validation -> validation.test(obj));

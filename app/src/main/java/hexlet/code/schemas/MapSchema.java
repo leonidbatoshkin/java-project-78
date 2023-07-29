@@ -1,26 +1,26 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
-import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
     private int size;
     private Map<String, BaseSchema> schemas;
 
-    private final Predicate<Object> checkSize = map -> map instanceof Map && ((Map<?, ?>) map).size() == size;
-    private final Predicate<Object> checkNested = map -> map instanceof Map && schemas.entrySet().stream()
-            .map(schema -> schema.getValue().isValid(((Map<?, ?>) map).get(schema.getKey())))
-            .allMatch(schema -> schema.equals(true));
+    public MapSchema() {
+        setNewValidation(map -> map instanceof Map);
+    }
 
     public MapSchema sizeof(int mapSize) {
         size = mapSize;
-        setNewValidation(checkSize);
+        setNewValidation(map -> ((Map<?, ?>) map).size() == size);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> maps) {
         schemas = maps;
-        setNewValidation(checkNested);
+        setNewValidation(map -> schemas.entrySet().stream()
+                .map(schema -> schema.getValue().isValid(((Map<?, ?>) map).get(schema.getKey())))
+                .allMatch(schema -> schema.equals(true)));
         return this;
     }
 }
