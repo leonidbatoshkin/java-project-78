@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public final class ValidatorTest {
-    private static final Map<String, BaseSchema> SCHEMAS = new HashMap<>();
     private static Validator v;
 
     @BeforeAll
@@ -70,6 +69,7 @@ public final class ValidatorTest {
     @Test
     void testMapSchema() {
         MapSchema schema = v.map();
+        Map<String, BaseSchema> schemas = new HashMap<>();
         assertTrue(schema.isValid(null));
         schema.required();
         assertFalse(schema.isValid(null));
@@ -82,9 +82,9 @@ public final class ValidatorTest {
         data.put("key2", "value2");
         assertTrue(schema.isValid(data));
 
-        SCHEMAS.put("name", v.string().required());
-        SCHEMAS.put("age", v.number().positive());
-        schema.shape(SCHEMAS);
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+        schema.shape(schemas);
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
